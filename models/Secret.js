@@ -9,8 +9,8 @@ const secretSchema = new mongoose.Schema({
     owner:{
         type: mongoose.Schema.Types.ObjectId,
         required : true,
-        ref: 'user',
-        unique: true
+        ref: 'user'
+        
     }
 })
 const Secret = mongoose.model('Secret',secretSchema)
