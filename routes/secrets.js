@@ -8,7 +8,9 @@ const router = express.Router();
 
 
 router.post('/submit',fetchuser,async(req,res)=>{
-    const newSecret = new Secret({
+    const user = await User.findById(req.user.id)
+    if(!user){
+       const newSecret = new Secret({
         ...req.body,
         owner: req.user.id
     })
@@ -20,6 +22,8 @@ router.post('/submit',fetchuser,async(req,res)=>{
        res.status(500).json({error:'Internal Server Error'})
        console.log(e);
    }
+    }else{res.json({error:'One User Can only have one secret'})}
+    
 })
 
 
